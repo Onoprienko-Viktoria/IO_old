@@ -104,7 +104,16 @@ public class FileAnalyserAndManagerTest {
     }
 
     @Test
-    void testMoveWorkCorrectly() throws IOException {
+    void testCopyAlsoCopyContentInsideFile() throws IOException {
+        FileManager.copy("./src/test/resources/path4/path5/file4.txt", "./src/test/resources/path2/file4.txt");
+        assertEquals(2, FileManager.countFiles("./src/test/resources/path4/path5"));
+        assertEquals(1, FileManager.countFiles("./src/test/resources/path2"));
+        assertEquals("Я люблю java ! Язык программирования java лучший. Без него было бы плохо. java лучший java ? Да, лучший.", FileAnalyser.Reader("./src/test/resources/path4/path5/file4.txt"));
+        assertEquals("Я люблю java ! Язык программирования java лучший. Без него было бы плохо. java лучший java ? Да, лучший.", FileAnalyser.Reader("./src/test/resources/path2/file4.txt"));
+    }
+
+    @Test
+    void testMoveWorkCorrectly() {
         FileManager.move("./src/test/resources/path4/file2.txt", "./src/test/resources/path3/file2.txt");
         assertEquals(3, FileManager.countFiles("./src/test/resources/path4"));
         assertEquals(1, FileManager.countFiles("./src/test/resources/path3"));
@@ -132,6 +141,8 @@ public class FileAnalyserAndManagerTest {
         file3.delete();
         File path1 = new File("./src/test/resources/path1");
         path1.delete();
+        File filePath2 = new File("./src/test/resources/path2/file4.txt");
+        filePath2.delete();
         File path2 = new File("./src/test/resources/path2");
         path2.delete();
         File path3 = new File("./src/test/resources/path3");

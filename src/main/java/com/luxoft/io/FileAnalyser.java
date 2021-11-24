@@ -34,7 +34,7 @@ public class FileAnalyser {
         return sentencesWithWord.toString();
     }
 
-    private static String Reader(String path) throws IOException {
+    static String Reader(String path) throws IOException {
         File pathToFile = new File(path);
         try (InputStream inputStream = new FileInputStream(pathToFile)) {
             int fileLength = (int) pathToFile.length();

@@ -33,12 +33,18 @@ public class FileManager {
     }
 
     public static void copy(String from, String to) throws IOException {
+        String content = FileAnalyser.Reader(from);
         move(from, to);
-        new File(from).createNewFile();
+        File fileFrom = new File(from);
+        fileFrom.createNewFile();
+        try (FileWriter fileWriter = new FileWriter(fileFrom)) {
+            fileWriter.write(content);
+        }
     }
 
 
     public static void move(String from, String to) {
         new File(from).renameTo(new File(to));
+        new File(from).delete();
     }
 }
