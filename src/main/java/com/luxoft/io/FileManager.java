@@ -33,13 +33,12 @@ public class FileManager {
     }
 
     public static void copy(String from, String to) throws IOException {
-        move(from, to);
         File fileFrom = new File(from);
         File fileTo = new File(to);
-        fileFrom.createNewFile();
-        try ( InputStream inputStream = new FileInputStream(fileTo);
-              OutputStream outputStream = new FileOutputStream(fileFrom)){
-            int length = (int) fileTo.length();
+        fileTo.createNewFile();
+        try (InputStream inputStream = new FileInputStream(fileFrom);
+             OutputStream outputStream = new FileOutputStream(fileTo)) {
+            int length = (int) fileFrom.length();
             byte[] content = new byte[length];
             inputStream.read(content);
             outputStream.write(content);
